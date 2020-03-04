@@ -64,7 +64,10 @@ export const MainBody: React.FC = () => {
 
   const alertMessage = (
     <div>
-      已选择 {selectedRowKeys.length} 项{' '}
+      <span>
+        已选择 <a>{selectedRowKeys.length}</a> 项
+      </span>
+      <span dangerouslySetInnerHTML={{ __html: '&nbsp;'.repeat(9) }}></span>
       <a onClick={() => setSelectedRowKeys([])}>清空</a>
     </div>
   );
