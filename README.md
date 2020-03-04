@@ -1,2 +1,15 @@
-# relief supplies management
- 一个基于 React.js 的救灾物资管理系统
+# umi project
+
+## Getting Started
+
+Install dependencies,
+
+```bash
+$ yarn
+```
+
+Start the dev server,
+
+```bash
+$ yarn start
+```
