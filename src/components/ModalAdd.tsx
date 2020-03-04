@@ -1,5 +1,9 @@
 import React from 'react';
-import { Modal, Form, Input, Radio } from 'antd';
+import { Modal, Form, Input, Radio, Select } from 'antd';
+
+const { TextArea } = Input;
+
+const { Option } = Select;
 
 interface Props {
   visible: boolean;
@@ -69,6 +73,38 @@ export const ModalAdd: React.FC<Props> = props => {
 
         <Form.Item label="体积" name="volume">
           <Input placeholder="请输入体积" />
+        </Form.Item>
+
+        <Form.Item label="物资类别" name="category">
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="规格/型号"
+          name="model"
+          rules={[{ required: true, message: '请输入规格/型号!' }]}
+        >
+          <Input placeholder="请输入规格/型号" />
+        </Form.Item>
+
+        <Form.Item
+          label="储备类型"
+          name="reserve type"
+          rules={[{ required: true, message: '请输入储备类型!' }]}
+        >
+          <Select placeholder="请输入储备类型">
+            <Option value="jack">Jack</Option>
+            <Option value="lucy">Lucy</Option>
+            <Option value="Yiminghe">yiminghe</Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item label="重量" name="weight">
+          <Input placeholder="请输入重量" />
+        </Form.Item>
+
+        <Form.Item label="物资用途" name="usage">
+          <TextArea placeholder="请输入物资用途" />
         </Form.Item>
       </Form>
     </Modal>
