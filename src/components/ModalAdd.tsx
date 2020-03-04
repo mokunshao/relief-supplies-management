@@ -34,12 +34,7 @@ export const ModalAdd: React.FC<Props> = props => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <Form
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
+      <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <Form.Item
           label="物资品名"
           name="name"
