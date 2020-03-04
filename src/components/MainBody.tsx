@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Alert, Table } from 'antd';
+import { Button, Alert, Table, Modal } from 'antd';
+import ModalAdd from './ModalAdd';
+import ModalEdit from './ModalEdit';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+
+const { confirm } = Modal;
 
 const columns = [
   {
@@ -60,23 +65,50 @@ export const MainBody: React.FC = () => {
     onChange: onSelectChange,
   };
 
-  const hasSelected = selectedRowKeys.length > 0;
+  const selectedLength = selectedRowKeys.length;
+
+  const hasSelected = selectedLength > 0;
 
   const alertMessage = (
     <div>
       <span>
-        已选择 <a>{selectedRowKeys.length}</a> 项
+        已选择 <a>{selectedLength}</a> 项
       </span>
       <span dangerouslySetInnerHTML={{ __html: '&nbsp;'.repeat(9) }}></span>
       <a onClick={() => setSelectedRowKeys([])}>清空</a>
     </div>
   );
 
+  const [isShowModalAdd, setIsShowModalAdd] = useState(false);
+  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
+
+  const showConfirm = () => {
+    if (!selectedLength) return;
+    confirm({
+      title: '你想删除这些记录吗？',
+      icon: <ExclamationCircleOutlined />,
+      content: selectedLength + ' 条记录将会被删除！',
+      onOk() {
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+        }).catch(() => console.log('Oops errors!'));
+      },
+      onCancel() {},
+    });
+  };
+
   return (
     <div>
       <div style={{ marginBottom: 16 }}>
-        <Button type="primary">新增</Button>
-        <Button danger>删除</Button>
+        <Button type="primary" onClick={() => setIsShowModalAdd(true)}>
+          新增
+        </Button>
+        <Button type="primary" onClick={() => setIsShowModalEdit(true)}>
+          编辑
+        </Button>
+        <Button danger onClick={showConfirm}>
+          删除
+        </Button>
       </div>
 
       <div style={{ marginBottom: 16 }}>
@@ -92,6 +124,8 @@ export const MainBody: React.FC = () => {
           showQuickJumper: true,
         }}
       />
+      <ModalAdd visible={isShowModalAdd} setVidsible={setIsShowModalAdd} />
+      <ModalEdit visible={isShowModalEdit} setVidsible={setIsShowModalEdit} />
     </div>
   );
 };
