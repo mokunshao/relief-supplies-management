@@ -82,7 +82,16 @@ export const MainBody: React.FC = () => {
       <div style={{ marginBottom: 16 }}>
         {hasSelected && <Alert message={alertMessage} type="info" showIcon />}
       </div>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+      <Table
+        loading={loading}
+        rowSelection={rowSelection}
+        columns={columns}
+        dataSource={data}
+        pagination={{
+          showSizeChanger: true,
+          showQuickJumper: true,
+        }}
+      />
     </div>
   );
 };
