@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import context from '@/context';
 import { Modal, Form, Input, Radio, Select, Row, Col } from 'antd';
+import { deepClone } from '@/utils';
 
 const { TextArea } = Input;
 
@@ -25,12 +26,7 @@ export const ModalEdit: React.FC<Props> = props => {
 
   const { state } = useContext(context);
 
-  const item =
-    (state.currentEditing &&
-      JSON.parse(JSON.stringify(state.currentEditing))) ||
-    {};
-
-  console.log(item.name);
+  const item = (state.currentEditing && deepClone(state.currentEditing)) || {};
 
   const [form] = Form.useForm();
 

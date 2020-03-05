@@ -5,6 +5,7 @@ import ModalEdit from './ModalEdit';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import context from '@/context';
 import Axios from 'axios';
+import { deepClone } from '@/utils';
 
 const { confirm } = Modal;
 
@@ -90,9 +91,7 @@ export const MainBody: React.FC = () => {
 
   const handleEdit = (item: Object) => {
     setIsShowModalEdit(true);
-    const newState = JSON.parse(
-      JSON.stringify({ ...state, currentEditing: item }),
-    );
+    const newState = deepClone({ ...state, currentEditing: item });
     setState(newState);
   };
 
