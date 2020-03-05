@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
 import { Form, Input, Button, Select, Row, Col } from 'antd';
 import context from '@/context';
+import Axios from 'axios';
 
 export const MainHead: React.FC = () => {
   const [form] = Form.useForm();
 
-  const onFinish = (values: Object) => {
-    console.log('Success:', values);
+  const onFinish = (values: { [k: string]: any }) => {
+    Axios.post('/api/items/getByConditions', values).then(r => {
+      console.log(r.data);
+    });
   };
 
   const onReset = () => {
