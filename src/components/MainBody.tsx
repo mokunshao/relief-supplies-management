@@ -24,7 +24,7 @@ const columns = [
   },
   {
     title: '储备类型',
-    dataIndex: 'type',
+    dataIndex: 'type2',
   },
   {
     title: '是否有效',
