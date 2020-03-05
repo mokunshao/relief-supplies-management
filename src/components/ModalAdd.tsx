@@ -10,6 +10,15 @@ interface Props {
   setVidsible: Function;
 }
 
+const layout = {
+  labelCol: { span: 5 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  labelCol: { span: 2 },
+  wrapperCol: { span: 22 },
+};
+
 export const ModalAdd: React.FC<Props> = props => {
   const { visible, setVidsible } = props;
 
@@ -43,7 +52,7 @@ export const ModalAdd: React.FC<Props> = props => {
       onCancel={handleCancel}
       width="50%"
     >
-      <Form form={form}>
+      <Form {...layout} form={form}>
         <Row>
           <Col span={12}>
             <Form.Item
@@ -112,7 +121,7 @@ export const ModalAdd: React.FC<Props> = props => {
           </Col>
         </Row>
 
-        <Form.Item label="物资用途" name="usage">
+        <Form.Item label="物资用途" name="usage" {...tailLayout}>
           <TextArea placeholder="请输入物资用途" style={{ width: '100%' }} />
         </Form.Item>
       </Form>
