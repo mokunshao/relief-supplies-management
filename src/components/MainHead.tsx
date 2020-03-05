@@ -1,14 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Input, Button, Select, Row, Col } from 'antd';
-
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 8 },
-};
-
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
+import context from '@/context';
 
 export const MainHead: React.FC = () => {
   const [form] = Form.useForm();
@@ -21,10 +13,12 @@ export const MainHead: React.FC = () => {
     form.resetFields();
   };
 
+  const { state, setState } = useContext(context);
+
   return (
     <div>
+      {JSON.stringify(state)}
       <Form
-        // {...layout}
         form={form}
         name="basic"
         initialValues={{ remember: true }}

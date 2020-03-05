@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Input, Tree } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
+import context from '@/context';
 
 const { Search } = Input;
 
@@ -32,8 +33,11 @@ export const Aside: React.FC = () => {
     },
   ];
 
+  const { state, setState } = useContext(context);
+
   return (
     <div>
+      {JSON.stringify(state)}
       <Search onSearch={value => console.log(value)} />
       <Tree
         treeData={treeData}
