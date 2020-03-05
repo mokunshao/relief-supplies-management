@@ -9,6 +9,7 @@ const { Option } = Select;
 interface Props {
   visible: boolean;
   setVidsible: Function;
+  callback: Function;
 }
 
 const layout = {
@@ -21,7 +22,7 @@ const tailLayout = {
 };
 
 export const ModalAdd: React.FC<Props> = props => {
-  const { visible, setVidsible } = props;
+  const { visible, setVidsible, callback } = props;
 
   const [form] = Form.useForm();
 
@@ -34,10 +35,10 @@ export const ModalAdd: React.FC<Props> = props => {
         ...formData,
         createdTime: Date.now(),
       };
-      console.log(formData2);
       Axios.post('/api/items/add', { data: formData2 }).then(() => {
         setVidsible(false);
         resetFormData();
+        callback();
       });
     });
   };

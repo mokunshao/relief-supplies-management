@@ -99,6 +99,7 @@ export const MainBody: React.FC = () => {
     const newState = deepClone({ ...state, currentEditing: item });
     setState(newState);
   };
+
   const getFormData = function() {
     setLoading(true);
     Axios.get('/api/items').then(res => {
@@ -146,8 +147,16 @@ export const MainBody: React.FC = () => {
           showQuickJumper: true,
         }}
       />
-      <ModalAdd visible={isShowModalAdd} setVidsible={setIsShowModalAdd} />
-      <ModalEdit visible={isShowModalEdit} setVidsible={setIsShowModalEdit} />
+      <ModalAdd
+        visible={isShowModalAdd}
+        setVidsible={setIsShowModalAdd}
+        callback={getFormData}
+      />
+      <ModalEdit
+        visible={isShowModalEdit}
+        setVidsible={setIsShowModalEdit}
+        callback={getFormData}
+      />
     </div>
   );
 };

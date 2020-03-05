@@ -10,6 +10,7 @@ const { Option } = Select;
 interface Props {
   visible: boolean;
   setVidsible: Function;
+  callback: Function;
 }
 
 const layout = {
@@ -22,7 +23,7 @@ const tailLayout = {
 };
 
 export const ModalEdit: React.FC<Props> = props => {
-  const { visible, setVidsible } = props;
+  const { visible, setVidsible, callback } = props;
 
   const { state } = useContext(context);
 
@@ -35,7 +36,7 @@ export const ModalEdit: React.FC<Props> = props => {
   const handleOk = () => {
     const values = form.getFieldsValue();
     console.log(values);
-
+    callback();
     setVidsible(false);
   };
 
