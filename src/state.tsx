@@ -1,3 +1,3 @@
 export default {
-  name: 34,
+  type: -1,
 };
