@@ -36,16 +36,22 @@ const fakeItems: any = Mock.mock({
     {
       key: '@id()',
       name: '@ctitle(4)',
-      'model|1-5': 1,
+      unit: '斤',
       'isValid|1': true,
       'sort|1-5': 1,
+      volumn: '15',
+      'model|1-5': 1,
+      type2: 'xx',
+      weight: '10kg',
+      usage: 'adwecswewe',
+      createdTime: '@now()',
     },
   ],
 });
 
 fakeItems.items.forEach((item: any) => {
   const i = randomNum(10);
-  const type = fakeTypes.types[i];
+  const type = fakeTypes.types[i].title;
   item.type = type;
 });
 

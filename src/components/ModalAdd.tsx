@@ -91,7 +91,7 @@ export const ModalAdd: React.FC<Props> = props => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label="物资类别" name="category">
+            <Form.Item label="物资类别" name="type">
               <Input />
             </Form.Item>
 
@@ -105,7 +105,7 @@ export const ModalAdd: React.FC<Props> = props => {
 
             <Form.Item
               label="储备类型"
-              name="reserve type"
+              name="type2"
               rules={[{ required: true, message: '请输入储备类型!' }]}
             >
               <Select placeholder="请输入储备类型">

@@ -13,11 +13,8 @@ export const MainHead: React.FC = () => {
     form.resetFields();
   };
 
-  const { state, setState } = useContext(context);
-
   return (
     <div>
-      {JSON.stringify(state)}
       <Form
         form={form}
         name="basic"

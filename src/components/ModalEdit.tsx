@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import context from '@/context';
 import { Modal, Form, Input, Radio, Select, Row, Col } from 'antd';
 
 const { TextArea } = Input;
@@ -9,7 +9,6 @@ const { Option } = Select;
 interface Props {
   visible: boolean;
   setVidsible: Function;
-  item: { [k: string]: any };
 }
 
 const layout = {
@@ -22,7 +21,16 @@ const tailLayout = {
 };
 
 export const ModalEdit: React.FC<Props> = props => {
-  const { visible, setVidsible, item } = props;
+  const { visible, setVidsible } = props;
+
+  const { state } = useContext(context);
+
+  const item =
+    (state.currentEditing &&
+      JSON.parse(JSON.stringify(state.currentEditing))) ||
+    {};
+
+  console.log(item.name);
 
   const [form] = Form.useForm();
 
@@ -35,8 +43,6 @@ export const ModalEdit: React.FC<Props> = props => {
     setVidsible(false);
     console.log('cancel');
   };
-
-  console.log(item);
 
   return (
     <Modal
@@ -85,8 +91,8 @@ export const ModalEdit: React.FC<Props> = props => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label="物资类别" name="category">
-              <Input disabled defaultValue={item.category} />
+            <Form.Item label="物资类别" name="type">
+              <Input disabled defaultValue={item.type ? item.type.title : ''} />
             </Form.Item>
             <Form.Item
               label="规格/型号"
@@ -98,10 +104,13 @@ export const ModalEdit: React.FC<Props> = props => {
 
             <Form.Item
               label="储备类型"
-              name="reserve type"
+              name="type2"
               rules={[{ required: true, message: '请输入储备类型!' }]}
             >
-              <Select placeholder="请输入储备类型" defaultValue={item.type}>
+              <Select
+                placeholder="请输入储备类型"
+                defaultValue={item.type2 ? item.type2 : ''}
+              >
                 <Option value="jack">Jack</Option>
                 <Option value="lucy">Lucy</Option>
                 <Option value="Yiminghe">yiminghe</Option>

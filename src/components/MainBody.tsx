@@ -88,11 +88,12 @@ export const MainBody: React.FC = () => {
 
   const [data, setData] = useState([]);
 
-  const [editingItem, setEditingItem] = useState({});
-
   const handleEdit = (item: Object) => {
     setIsShowModalEdit(true);
-    setEditingItem(item);
+    const newState = JSON.parse(
+      JSON.stringify({ ...state, currentEditing: item }),
+    );
+    setState(newState);
   };
 
   useEffect(() => {
@@ -115,12 +116,7 @@ export const MainBody: React.FC = () => {
 
   return (
     <div>
-      <div>
-        {JSON.stringify(state)}
-        <button onClick={() => setState({ ...state, name: state.name += 1 })}>
-          ok
-        </button>
-      </div>
+      <div></div>
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" onClick={() => setIsShowModalAdd(true)}>
           新增
@@ -144,11 +140,7 @@ export const MainBody: React.FC = () => {
         }}
       />
       <ModalAdd visible={isShowModalAdd} setVidsible={setIsShowModalAdd} />
-      <ModalEdit
-        visible={isShowModalEdit}
-        setVidsible={setIsShowModalEdit}
-        item={editingItem}
-      />
+      <ModalEdit visible={isShowModalEdit} setVidsible={setIsShowModalEdit} />
     </div>
   );
 };
