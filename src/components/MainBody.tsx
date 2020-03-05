@@ -43,7 +43,6 @@ const columns = [
 
 export const MainBody: React.FC = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Array<any>>([]);
-  const [loading, setLoading] = useState(false);
   const onSelectChange = (selectedRowKeys: Array<any>) => {
     setSelectedRowKeys(selectedRowKeys);
   };
@@ -100,7 +99,7 @@ export const MainBody: React.FC = () => {
   };
 
   const getFormData = function() {
-    setLoading(true);
+    setState({ ...state, formLoading: true });
     Axios.get('/api/items').then(res => {
       const { data } = res;
       const { items } = data;
@@ -113,7 +112,7 @@ export const MainBody: React.FC = () => {
         );
       });
       setData(items);
-      setLoading(false);
+      setState({ ...state, formLoading: false });
     });
   };
 
@@ -137,7 +136,7 @@ export const MainBody: React.FC = () => {
         {hasSelected && <Alert message={alertMessage} type="info" showIcon />}
       </div>
       <Table
-        loading={loading}
+        loading={state.formLoading}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={data}
