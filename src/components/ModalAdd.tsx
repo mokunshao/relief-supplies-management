@@ -13,19 +13,25 @@ interface Props {
 export const ModalAdd: React.FC<Props> = props => {
   const { visible, setVidsible } = props;
 
+  const [form] = Form.useForm();
+
+  const resetFormData = () => form.resetFields();
+
   const handleOk = () => {
     setVidsible(false);
-    console.log('ok');
+    const formData = form.getFieldsValue();
+    const formData2 = {
+      ...formData,
+      createdTime: Date.now(),
+    };
+    console.log(formData2);
+    resetFormData();
   };
 
   const handleCancel = () => {
     setVidsible(false);
-    console.log('cancel');
+    resetFormData();
   };
-
-  const onFinish = () => console.log(121);
-
-  const onFinishFailed = () => console.log(121);
 
   return (
     <Modal
@@ -34,7 +40,7 @@ export const ModalAdd: React.FC<Props> = props => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
+      <Form form={form}>
         <Form.Item
           label="物资品名"
           name="name"
