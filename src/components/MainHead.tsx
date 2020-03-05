@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, Row, Col } from 'antd';
 
 const layout = {
   labelCol: { span: 8 },
@@ -24,31 +24,35 @@ export const MainHead: React.FC = () => {
   return (
     <div>
       <Form
-        {...layout}
+        // {...layout}
         form={form}
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
-        <Form.Item label="规格/型号" name="model">
-          <Input placeholder="请输入规格/型号" />
-        </Form.Item>
-
-        <Form.Item label="是否有效" name="isValid">
-          <Select>
-            <Select.Option value="valid">有效</Select.Option>
-            <Select.Option value="notValid">无效</Select.Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            查询
-          </Button>
-          <Button htmlType="button" onClick={onReset}>
-            重置
-          </Button>
-        </Form.Item>
+        <Row>
+          <Col span={12} style={{ padding: '2em 0 0 2em' }}>
+            <Form.Item label="规格/型号" name="model">
+              <Input placeholder="请输入规格/型号" style={{ width: 300 }} />
+            </Form.Item>
+          </Col>
+          <Col span={12} style={{ paddingTop: '2em' }}>
+            <Form.Item label="是否有效" name="isValid">
+              <Select style={{ width: 300 }} placeholder="请选择是否有效">
+                <Select.Option value="valid">有效</Select.Option>
+                <Select.Option value="notValid">无效</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                查询
+              </Button>
+              <Button htmlType="button" onClick={onReset}>
+                重置
+              </Button>
+            </Form.Item>
+          </Col>
+        </Row>
       </Form>
     </div>
   );
