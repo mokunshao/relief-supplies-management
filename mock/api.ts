@@ -50,18 +50,24 @@ const fakeItems: any = Mock.mock({
 });
 
 fakeItems.items.forEach((item: any) => {
-  const i = randomNum(10);
-  const type = fakeTypes.types[i].title;
+  const i = randomNum(5);
+  const type = fakeTypes.types[i];
   item.type = type;
 });
 
 export default {
-  // '/api/tree': { treeData },
-  // 'POST /api/tree': (req: any, res: any) => {
-  //   treeData.push('test');
-  //   res.end('ok');
-  // },
-
   '/api/items': fakeItems,
   '/api/types': fakeTypes,
+  'POST /api/items/add': (req: any, res: any) => {
+    console.log(req.body);
+    res.end('ok');
+  },
+  'POST /api/items/remove': (req: any, res: any) => {
+    console.log(req.body);
+    res.end('ok');
+  },
+  'POST /api/items/edit': (req: any, res: any) => {
+    console.log(req.body);
+    res.end('ok');
+  },
 };
