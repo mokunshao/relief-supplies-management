@@ -95,7 +95,22 @@ export default {
     res.end('ok');
   },
   'POST /api/items/getByConditions': (req: any, res: any) => {
-    const { conditions } = req.body;
-    console.log(conditions);
+    let { model, isValid } = req.body;
+    model = parseInt(model);
+    isValid = Boolean(isValid);
+    if (model === undefined && !isValid === undefined) {
+      res.status(500).send({ error: 'Something blew up!' });
+      return;
+    }
+    const result = fakeItems.items.filter((item: any) => {
+      if (model && isValid) {
+        return item.model === model && item.isValid === isValid;
+      }
+      if (!model) {
+        return item.isValid === isValid;
+      }
+      return item.model === model;
+    });
+    res.send(result);
   },
 };
