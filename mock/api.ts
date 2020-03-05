@@ -72,7 +72,8 @@ export default {
     res.end('ok');
   },
   'POST /api/items/edit': (req: any, res: any) => {
-    console.log(req.body);
+    const { data } = req.body;
+    console.log(data);
     res.end('ok');
   },
 };
