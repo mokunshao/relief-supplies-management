@@ -45,7 +45,6 @@ export const MainBody: React.FC = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Array<any>>([]);
   const [loading, setLoading] = useState(false);
   const onSelectChange = (selectedRowKeys: Array<any>) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(selectedRowKeys);
   };
 
@@ -129,7 +128,7 @@ export const MainBody: React.FC = () => {
         <Button type="primary" onClick={() => setIsShowModalAdd(true)}>
           新增
         </Button>
-        <Button danger onClick={showConfirm}>
+        <Button disabled={selectedLength === 0} danger onClick={showConfirm}>
           删除
         </Button>
       </div>
