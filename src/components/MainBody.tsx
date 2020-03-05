@@ -29,6 +29,7 @@ const columns = [
   {
     title: '是否有效',
     dataIndex: 'isValid',
+    render: (value: any) => <span>{value ? '是' : '否'}</span>,
   },
   {
     title: '排序',
