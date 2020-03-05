@@ -76,4 +76,9 @@ export default {
     console.log(data);
     res.end('ok');
   },
+  'POST /api/items/getByType': (req: any, res: any) => {
+    const { key } = req.body;
+    const items = fakeItems.items.filter((item: any) => item.type.key === key);
+    res.json({ items });
+  },
 };
