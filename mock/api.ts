@@ -1,4 +1,5 @@
 import Mock from 'mockjs';
+import { randomNum } from '../src/utils';
 
 // const treeData: any[] = [
 //   {
@@ -26,22 +27,26 @@ import Mock from 'mockjs';
 //   },
 // ];
 
-const fakeItems: Array<any> = [];
-
-for (let i = 0; i < 20; i++) {
-  fakeItems.push({
-    key: i,
-    index: i + 1,
-    name: `救援物资 ${i + 1}`,
-    model: 32,
-    type: '不知道',
-    isValid: true,
-    sort: 10,
-  });
-}
-
-const fakeTypes: any[] = Mock.mock({
+const fakeTypes: any = Mock.mock({
   'types|10': [{ title: '@ctitle(4)', key: '@id()' }],
+});
+
+const fakeItems: any = Mock.mock({
+  'items|30': [
+    {
+      key: '@id()',
+      name: '@ctitle(4)',
+      'model|1-5': 1,
+      'isValid|1': true,
+      'sort|1-5': 1,
+    },
+  ],
+});
+
+fakeItems.items.forEach((item: any) => {
+  const i = randomNum(10);
+  const type = fakeTypes.types[i];
+  item.type = type;
 });
 
 export default {

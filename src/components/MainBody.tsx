@@ -99,14 +99,16 @@ export const MainBody: React.FC = () => {
     setLoading(true);
     Axios.get('/api/items').then(res => {
       const { data } = res;
-      data.forEach((item: any) => {
+      const { items } = data;
+      items.forEach((item: any, i: number) => {
+        item.index = i;
         item.operation = (
           <Button type="primary" onClick={() => handleEdit(item)}>
             编辑
           </Button>
         );
       });
-      setData(data);
+      setData(items);
       setLoading(false);
     });
   }, []);
