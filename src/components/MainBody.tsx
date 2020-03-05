@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Button, Alert, Table, Modal } from 'antd';
 import ModalAdd from './ModalAdd';
 import ModalEdit from './ModalEdit';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import context from '@/context';
+import Axios from 'axios';
 
 const { confirm } = Modal;
 
@@ -37,21 +38,6 @@ const columns = [
     dataIndex: 'operation',
   },
 ];
-
-const data: Array<any> = [];
-
-for (let i = 0; i < 20; i++) {
-  data.push({
-    key: i,
-    index: i + 1,
-    name: `救援物资 ${i + 1}`,
-    model: 32,
-    type: '不知道',
-    isValid: '是',
-    sort: 10,
-    operation: <Button type="primary">编辑</Button>,
-  });
-}
 
 export const MainBody: React.FC = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Array<any>>([]);
@@ -99,6 +85,20 @@ export const MainBody: React.FC = () => {
   };
 
   const { state, setState } = useContext(context);
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    Axios.get('/api/items').then(res => {
+      const { data } = res;
+      data.forEach((item: any) => {
+        item.operation = <Button type="primary">编辑</Button>;
+      });
+      setData(data);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div>

@@ -1,3 +1,5 @@
+import Mock from 'mockjs';
+
 const treeData: any[] = [
   {
     title: '',
@@ -24,6 +26,23 @@ const treeData: any[] = [
   },
 ];
 
+const data: Array<any> = [];
+
+for (let i = 0; i < 20; i++) {
+  data.push({
+    key: i,
+    index: i + 1,
+    name: `救援物资 ${i + 1}`,
+    model: 32,
+    type: '不知道',
+    isValid: '是',
+    sort: 10,
+    // operation: <Button type="primary">编辑</Button>,
+  });
+}
+
+const fakeItems = data;
+
 export default {
   // 支持值为 Object 和 Array
   'GET /api/users': { users: [1, 2] },
@@ -44,4 +63,6 @@ export default {
     console.log(req, res);
     res.end('ok');
   },
+
+  '/api/items': fakeItems,
 };
