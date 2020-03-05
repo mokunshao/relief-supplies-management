@@ -87,8 +87,12 @@ export default {
     res.end('ok');
   },
   'POST /api/types/add': (req: any, res: any) => {
-    const { data } = req.body;
-    console.log(data);
+    const { title } = req.body;
+    fakeTypes.types.push({
+      title,
+      key: Mock.Random.id(),
+    });
+    res.end('ok');
   },
   'POST /api/items/getByConditions': (req: any, res: any) => {
     const { conditions } = req.body;
