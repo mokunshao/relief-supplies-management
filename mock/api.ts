@@ -97,7 +97,7 @@ export default {
   'POST /api/items/getByConditions': (req: any, res: any) => {
     let { model, isValid } = req.body;
     model = parseInt(model);
-    isValid = Boolean(isValid);
+    isValid = Boolean(parseInt(isValid));
     if (model === undefined && !isValid === undefined) {
       res.status(500).send({ error: 'Something blew up!' });
       return;

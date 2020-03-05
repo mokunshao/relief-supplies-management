@@ -30,8 +30,8 @@ export const MainHead: React.FC = () => {
           <Col span={12} style={{ paddingTop: '2em' }}>
             <Form.Item label="是否有效" name="isValid">
               <Select style={{ width: 300 }} placeholder="请选择是否有效">
-                <Select.Option value="valid">有效</Select.Option>
-                <Select.Option value="notValid">无效</Select.Option>
+                <Select.Option value="1">有效</Select.Option>
+                <Select.Option value="0">无效</Select.Option>
               </Select>
             </Form.Item>
             <Form.Item>
