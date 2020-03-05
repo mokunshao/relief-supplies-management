@@ -78,11 +78,10 @@ export const MainBody: React.FC = () => {
       icon: <ExclamationCircleOutlined />,
       content: selectedLength + ' 条记录将会被删除！',
       onOk() {
-        return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => console.log('Oops errors!'));
+        Axios.post('/api/items/remove', { data: selectedRowKeys }).then(r =>
+          getFormData(),
+        );
       },
-      onCancel() {},
     });
   };
 
@@ -95,8 +94,7 @@ export const MainBody: React.FC = () => {
     const newState = deepClone({ ...state, currentEditing: item });
     setState(newState);
   };
-
-  useEffect(() => {
+  const getFormData = function() {
     setLoading(true);
     Axios.get('/api/items').then(res => {
       const { data } = res;
@@ -112,6 +110,10 @@ export const MainBody: React.FC = () => {
       setData(items);
       setLoading(false);
     });
+  };
+
+  useEffect(() => {
+    getFormData();
   }, []);
 
   return (

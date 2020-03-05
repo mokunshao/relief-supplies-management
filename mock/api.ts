@@ -59,11 +59,16 @@ export default {
   '/api/items': fakeItems,
   '/api/types': fakeTypes,
   'POST /api/items/add': (req: any, res: any) => {
-    console.log(req.body);
+    const { data } = req.body;
+    data.key = Mock.Random.id();
+    fakeItems.items.push(data);
     res.end('ok');
   },
   'POST /api/items/remove': (req: any, res: any) => {
-    console.log(req.body);
+    const { data } = req.body;
+    data.forEach((id: string) => {
+      fakeItems.items = fakeItems.items.filter((item: any) => item.key !== id);
+    });
     res.end('ok');
   },
   'POST /api/items/edit': (req: any, res: any) => {

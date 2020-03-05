@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Form, Input, Radio, Select, Row, Col } from 'antd';
+import Axios from 'axios';
 
 const { TextArea } = Input;
 
@@ -34,8 +35,10 @@ export const ModalAdd: React.FC<Props> = props => {
         createdTime: Date.now(),
       };
       console.log(formData2);
-      setVidsible(false);
-      resetFormData();
+      Axios.post('/api/items/add', { data: formData2 }).then(() => {
+        setVidsible(false);
+        resetFormData();
+      });
     });
   };
 

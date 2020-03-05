@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import context from '@/context';
 import { Modal, Form, Input, Radio, Select, Row, Col } from 'antd';
 import { deepClone } from '@/utils';
@@ -28,16 +28,19 @@ export const ModalEdit: React.FC<Props> = props => {
 
   const item = (state.currentEditing && deepClone(state.currentEditing)) || {};
 
+  const [tempForm, setTempForm] = useState(item);
+
   const [form] = Form.useForm();
 
   const handleOk = () => {
+    const values = form.getFieldsValue();
+    console.log(values);
+
     setVidsible(false);
-    console.log('ok');
   };
 
   const handleCancel = () => {
     setVidsible(false);
-    console.log('cancel');
   };
 
   return (
@@ -48,6 +51,7 @@ export const ModalEdit: React.FC<Props> = props => {
       onCancel={handleCancel}
       width="50%"
     >
+      {JSON.stringify(item)}
       <Form {...layout} form={form}>
         <Row>
           <Col span={12}>
