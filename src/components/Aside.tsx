@@ -10,10 +10,18 @@ export const Aside: React.FC = () => {
   const [treeData, setTreeData] = useState([]);
   const { state, setState } = useContext(context);
   useEffect(() => {
-    axios('/api/tree').then(r => {
+    axios('/api/types').then(r => {
       const { data } = r;
-      data.treeData[0].icon = <HomeOutlined />;
-      setTreeData(data.treeData);
+      const children = data.types;
+      const data2: any = [
+        {
+          title: '',
+          key: '0-0',
+          children,
+        },
+      ];
+      data2[0].icon = <HomeOutlined />;
+      setTreeData(data2);
     });
   }, []);
   return (
