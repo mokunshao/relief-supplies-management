@@ -88,12 +88,23 @@ export const MainBody: React.FC = () => {
 
   const [data, setData] = useState([]);
 
+  const [editingItem, setEditingItem] = useState({});
+
+  const handleEdit = (item: Object) => {
+    setIsShowModalEdit(true);
+    setEditingItem(item);
+  };
+
   useEffect(() => {
     setLoading(true);
     Axios.get('/api/items').then(res => {
       const { data } = res;
       data.forEach((item: any) => {
-        item.operation = <Button type="primary">编辑</Button>;
+        item.operation = (
+          <Button type="primary" onClick={() => handleEdit(item)}>
+            编辑
+          </Button>
+        );
       });
       setData(data);
       setLoading(false);
@@ -111,9 +122,6 @@ export const MainBody: React.FC = () => {
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" onClick={() => setIsShowModalAdd(true)}>
           新增
-        </Button>
-        <Button type="primary" onClick={() => setIsShowModalEdit(true)}>
-          编辑
         </Button>
         <Button danger onClick={showConfirm}>
           删除
@@ -134,7 +142,11 @@ export const MainBody: React.FC = () => {
         }}
       />
       <ModalAdd visible={isShowModalAdd} setVidsible={setIsShowModalAdd} />
-      <ModalEdit visible={isShowModalEdit} setVidsible={setIsShowModalEdit} />
+      <ModalEdit
+        visible={isShowModalEdit}
+        setVidsible={setIsShowModalEdit}
+        item={editingItem}
+      />
     </div>
   );
 };
