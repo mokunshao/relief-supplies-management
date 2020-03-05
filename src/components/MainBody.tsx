@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 import { Button, Alert, Table, Modal } from 'antd';
 import ModalAdd from './ModalAdd';
 import ModalEdit from './ModalEdit';
@@ -54,9 +54,13 @@ export const MainBody: React.FC = () => {
     onChange: onSelectChange,
   };
 
-  const selectedLength = selectedRowKeys.length;
+  const selectedLength = useMemo(() => selectedRowKeys.length, [
+    selectedRowKeys.length,
+  ]);
 
-  const hasSelected = selectedLength > 0;
+  const hasSelected = useMemo(() => {
+    return selectedLength > 0;
+  }, [selectedRowKeys.length]);
 
   const alertMessage = (
     <div>
@@ -78,9 +82,10 @@ export const MainBody: React.FC = () => {
       icon: <ExclamationCircleOutlined />,
       content: selectedLength + ' 条记录将会被删除！',
       onOk() {
-        Axios.post('/api/items/remove', { data: selectedRowKeys }).then(r =>
-          getFormData(),
-        );
+        Axios.post('/api/items/remove', { data: selectedRowKeys }).then(r => {
+          getFormData();
+          setSelectedRowKeys([]);
+        });
       },
     });
   };
@@ -100,7 +105,7 @@ export const MainBody: React.FC = () => {
       const { data } = res;
       const { items } = data;
       items.forEach((item: any, i: number) => {
-        item.index = i;
+        item.index = i + 1;
         item.operation = (
           <Button type="primary" onClick={() => handleEdit(item)}>
             编辑
