@@ -71,14 +71,27 @@ export default {
     });
     res.end('ok');
   },
-  'POST /api/items/edit': (req: any, res: any) => {
-    const { data } = req.body;
-    console.log(data);
-    res.end('ok');
-  },
   'POST /api/items/getByType': (req: any, res: any) => {
     const { key } = req.body;
     const items = fakeItems.items.filter((item: any) => item.type.key === key);
     res.json({ items });
+  },
+  'POST /api/items/edit': (req: any, res: any) => {
+    const { body } = req;
+    const i = fakeItems.items.findIndex((item: any) => item.key === body.key);
+    const item = fakeItems.items[i];
+    for (const key in body) {
+      const v = body[key];
+      item[key] = v;
+    }
+    res.end('ok');
+  },
+  'POST /api/types/add': (req: any, res: any) => {
+    const { data } = req.body;
+    console.log(data);
+  },
+  'POST /api/items/getByConditions': (req: any, res: any) => {
+    const { conditions } = req.body;
+    console.log(conditions);
   },
 };
