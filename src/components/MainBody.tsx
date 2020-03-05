@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Alert, Table, Modal } from 'antd';
 import ModalAdd from './ModalAdd';
 import ModalEdit from './ModalEdit';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import context from '@/context';
 
 const { confirm } = Modal;
 
@@ -97,8 +98,16 @@ export const MainBody: React.FC = () => {
     });
   };
 
+  const { state, setState } = useContext(context);
+
   return (
     <div>
+      <div>
+        {JSON.stringify(state)}
+        <button onClick={() => setState({ ...state, name: state.name += 1 })}>
+          ok
+        </button>
+      </div>
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" onClick={() => setIsShowModalAdd(true)}>
           新增
