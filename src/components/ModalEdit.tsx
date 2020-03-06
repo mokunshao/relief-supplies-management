@@ -23,20 +23,14 @@ const tailLayout = {
 
 export const ModalEdit: React.FC<Props> = props => {
   const { visible, callback } = props;
-
+  if (!visible) return null;
   const { state, setState } = useContext(context);
-
-  const item: any = {};
-
-  const [form] = Form.useForm();
 
   const setVidsible = (val: boolean) => {
     setState((state: any) => ({ ...state, isShowModalEdit: val }));
   };
 
   const handleOk = () => {
-    // const values = form.getFieldsValue();
-    // console.log(values);
     callback();
     setVidsible(false);
   };
@@ -45,16 +39,18 @@ export const ModalEdit: React.FC<Props> = props => {
     setVidsible(false);
   };
 
+  const [form] = Form.useForm();
+
   return (
     <Modal
       title="编辑物资"
       visible={visible}
       onOk={handleOk}
       onCancel={handleCancel}
-      width="50%"
+      width="70%"
     >
       {JSON.stringify(state.currentEditing)}
-      <Form {...layout} form={form}>
+      {/* <Form {...layout} form={form}>
         <Row>
           <Col span={12}>
             <Form.Item
@@ -136,7 +132,7 @@ export const ModalEdit: React.FC<Props> = props => {
         >
           <Input disabled defaultValue={item.createdTime} />
         </Form.Item>
-      </Form>
+      </Form> */}
     </Modal>
   );
 };
