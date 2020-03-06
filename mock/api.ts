@@ -100,17 +100,17 @@ export default {
     const model2 = parseInt(model); // 0 1 2 3
     const isValid2 = Boolean(parseInt(isValid)); // true false
 
-    if (model === undefined && isValid === undefined) {
+    if ((model === undefined || model === '') && isValid === undefined) {
       result = fakeItems.items;
-    } else if (model === undefined && isValid !== undefined) {
+    } else if ((model === undefined || model === '') && isValid !== undefined) {
       result = fakeItems.items.filter((item: any) => {
         return item.isValid === isValid2;
       });
-    } else if (model !== undefined && isValid === undefined) {
+    } else if ((model !== undefined || model !== '') && isValid === undefined) {
       result = fakeItems.items.filter((item: any) => {
         return item.model === model2;
       });
-    } else if (model !== undefined && isValid !== undefined) {
+    } else if ((model !== undefined || model !== '') && isValid !== undefined) {
       result = fakeItems.items.filter((item: any) => {
         return item.model === model2 && item.isValid === isValid2;
       });
