@@ -92,8 +92,16 @@ export const ModalEdit: React.FC<Props> = props => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label="物资类别" name="type">
-              <Input disabled />
+            <Form.Item label="物资类别" name="type" valuePropName="type.key">
+              <Select disabled defaultValue={item.type.key}>
+                {state.types.map((item: any) => {
+                  return (
+                    <Option key={item.key} value={item.key}>
+                      {item.title}
+                    </Option>
+                  );
+                })}
+              </Select>
             </Form.Item>
             <Form.Item
               label="规格/型号"
