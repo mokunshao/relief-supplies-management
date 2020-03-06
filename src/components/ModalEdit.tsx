@@ -31,7 +31,7 @@ export const ModalEdit: React.FC<Props> = props => {
   const [form] = Form.useForm();
 
   const setVidsible = (val: boolean) => {
-    setState({ ...state, isShowModalEdit: val });
+    setState((state: any) => ({ ...state, isShowModalEdit: val }));
   };
 
   const handleOk = () => {

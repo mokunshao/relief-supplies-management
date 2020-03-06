@@ -92,23 +92,15 @@ export const MainBody: React.FC = () => {
   };
 
   const handleEdit = (item: Object) => {
-    console.log(item);
-    console.log(state);
     setState((state: any) => ({
       ...state,
       currentEditing: item,
       isShowModalEdit: true,
     }));
-
-    // state.currentEditing = item;
-    // setState({ ...state, currentEditing: item });
-    // console.log(item);
-    // const state2 = deepClone(state);
-    // setState({ ...state2, isShowModalEdit: true });
   };
 
   const getFormData = function() {
-    setState({ ...state, formLoading: true });
+    setState((state: any) => ({ ...state, formLoading: true }));
     Axios.get('/api/items').then(res => {
       const { data } = res;
       const { items } = data;
@@ -120,7 +112,11 @@ export const MainBody: React.FC = () => {
           </Button>
         );
       });
-      setState({ ...state, formData: items, formLoading: false });
+      setState((state: any) => ({
+        ...state,
+        formData: items,
+        formLoading: false,
+      }));
     });
   };
 

@@ -9,11 +9,11 @@ export const MainHead: React.FC = () => {
   const { state, setState } = useContext(context);
 
   const clickEdit = (item: any) => {
-    setState({ ...state, currentEditing: item });
+    setState((state: any) => ({ ...state, currentEditing: item }));
   };
 
   const onFinish = (values: { [k: string]: any }) => {
-    setState({ ...state, formLoading: true });
+    setState((state: any) => ({ ...state, formLoading: true }));
     Axios.post('/api/items/getByConditions', values).then(res => {
       const { data } = res;
       const items = data;
@@ -25,13 +25,17 @@ export const MainHead: React.FC = () => {
           </Button>
         );
       });
-      setState({ ...state, formData: items, formLoading: false });
+      setState((state: any) => ({
+        ...state,
+        formData: items,
+        formLoading: false,
+      }));
     });
   };
 
   const onReset = () => {
     form.resetFields();
-    setState({ ...state, formLoading: true });
+    setState((state: any) => ({ ...state, formLoading: true }));
     Axios.get('/api/items').then(res => {
       const items = res.data.items;
       items.forEach((item: any, i: number) => {
@@ -42,7 +46,11 @@ export const MainHead: React.FC = () => {
           </Button>
         );
       });
-      setState({ ...state, formData: items, formLoading: false });
+      setState((state: any) => ({
+        ...state,
+        formData: items,
+        formLoading: false,
+      }));
     });
   };
 
