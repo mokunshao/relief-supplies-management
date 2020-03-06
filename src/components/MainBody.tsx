@@ -90,8 +90,6 @@ export const MainBody: React.FC = () => {
 
   const { state, setState } = useContext(context);
 
-  const [data, setData] = useState([]);
-
   const handleEdit = (item: Object) => {
     setIsShowModalEdit(true);
     const newState = deepClone({ ...state, currentEditing: item });
@@ -111,8 +109,7 @@ export const MainBody: React.FC = () => {
           </Button>
         );
       });
-      setData(items);
-      setState({ ...state, formLoading: false });
+      setState({ ...state, formData: items, formLoading: false });
     });
   };
 
@@ -139,7 +136,7 @@ export const MainBody: React.FC = () => {
         loading={state.formLoading}
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={data}
+        dataSource={state.formData}
         pagination={{
           showSizeChanger: true,
           showQuickJumper: true,
