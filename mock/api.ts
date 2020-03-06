@@ -73,7 +73,7 @@ export default {
   },
   'POST /api/items/getByConditions': (req: any, res: any) => {
     let { model, isValid, typeKey } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     let result;
     const model2 = parseInt(model); // 0 1 2 3
     const isValid2 = Boolean(parseInt(isValid)); // true false

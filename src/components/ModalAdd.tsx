@@ -50,10 +50,6 @@ export const ModalAdd: React.FC<Props> = props => {
     resetFormData();
   };
 
-  const handleChange = (value: any) => {
-    console.log(`selected ${value}`);
-  };
-
   return (
     <Modal
       title="新增物资"
@@ -102,7 +98,7 @@ export const ModalAdd: React.FC<Props> = props => {
           </Col>
           <Col span={12}>
             <Form.Item label="物资类别" name="type">
-              <Select onChange={handleChange}>
+              <Select>
                 {state.types.map((item: any) => {
                   return (
                     <Option key={item.key} value={item.key}>
