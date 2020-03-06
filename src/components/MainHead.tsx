@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Form, Input, Button, Select, Row, Col } from 'antd';
 import context from '@/context';
 import Axios from 'axios';
@@ -59,6 +59,10 @@ export const MainHead: React.FC = () => {
       }));
     });
   };
+
+  useEffect(() => {
+    form.resetFields();
+  }, [state.treeSeleted[0]]);
 
   return (
     <div>

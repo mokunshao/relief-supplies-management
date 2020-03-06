@@ -74,7 +74,6 @@ export const Aside: React.FC = () => {
   };
   return (
     <div>
-      {JSON.stringify(state.treeSeleted)}
       <Search onSearch={value => console.log(value)} />
       <Tree
         selectedKeys={state.treeSeleted}
