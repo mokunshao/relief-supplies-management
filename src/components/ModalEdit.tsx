@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import context from '@/context';
 import { Modal, Form, Input, Radio, Select, Row, Col } from 'antd';
 import { deepClone } from '@/utils';
+import Axios from 'axios';
 
 const { TextArea } = Input;
 
@@ -29,21 +30,26 @@ export const ModalEdit: React.FC<Props> = props => {
   const setVidsible = (val: boolean) => {
     setState((state: any) => ({ ...state, isShowModalEdit: val }));
   };
+  const [form] = Form.useForm();
 
   const handleOk = () => {
-    const formData = form.getFieldsValue();
-    console.log(formData);
-    callback();
-    setVidsible(false);
+    form.validateFields().then(() => {
+      const formData = form.getFieldsValue();
+      formData.key = item.key;
+      // console.log(formData);
+      Axios.post('/api/items/edit', formData).then(r => {
+        callback();
+        setVidsible(false);
+      });
+    });
   };
 
   const handleCancel = () => {
     setVidsible(false);
   };
 
-  const [form] = Form.useForm();
-
   const item = deepClone(state.currentEditing);
+  // console.log(item);
 
   return (
     <Modal
