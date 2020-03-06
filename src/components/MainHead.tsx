@@ -8,8 +8,12 @@ export const MainHead: React.FC = () => {
 
   const { state, setState } = useContext(context);
 
-  const clickEdit = (item: any) => {
-    setState((state: any) => ({ ...state, currentEditing: item }));
+  const handleEdit = (item: Object) => {
+    setState((state: any) => ({
+      ...state,
+      currentEditing: item,
+      isShowModalEdit: true,
+    }));
   };
 
   const onFinish = (values: { [k: string]: any }) => {
@@ -20,7 +24,7 @@ export const MainHead: React.FC = () => {
       items.forEach((item: any, i: number) => {
         item.index = i + 1;
         item.operation = (
-          <Button type="primary" onClick={() => clickEdit(item)}>
+          <Button type="primary" onClick={() => handleEdit(item)}>
             编辑
           </Button>
         );
@@ -41,7 +45,7 @@ export const MainHead: React.FC = () => {
       items.forEach((item: any, i: number) => {
         item.index = i + 1;
         item.operation = (
-          <Button type="primary" onClick={() => clickEdit(item)}>
+          <Button type="primary" onClick={() => handleEdit(item)}>
             编辑
           </Button>
         );

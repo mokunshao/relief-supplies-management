@@ -3,6 +3,8 @@ import { Input, Tree } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 import context from '@/context';
 import axios from 'axios';
+import Axios from 'axios';
+import { Button } from 'antd';
 
 const { Search } = Input;
 
@@ -16,7 +18,7 @@ export const Aside: React.FC = () => {
       const data2: any = [
         {
           title: '',
-          key: '0-0',
+          key: '0',
           children,
         },
       ];
@@ -24,6 +26,51 @@ export const Aside: React.FC = () => {
       setTreeData(data2);
     });
   }, []);
+
+  const handleEdit = (item: Object) => {
+    setState((state: any) => ({
+      ...state,
+      currentEditing: item,
+      isShowModalEdit: true,
+    }));
+  };
+
+  const onSelect = (selectedKeys: any, info: any) => {
+    const key = selectedKeys[0];
+    if (key === '0') {
+      Axios.get('/api/items').then(r => {
+        const items = r.data.items;
+        items.forEach((item: any, i: number) => {
+          item.index = i + 1;
+          item.operation = (
+            <Button type="primary" onClick={() => handleEdit(item)}>
+              编辑
+            </Button>
+          );
+        });
+        setState((state: any) => ({
+          ...state,
+          formData: items,
+        }));
+      });
+    } else {
+      Axios.post('/api/items/getByType', { key }).then(r => {
+        const items = r.data.items;
+        items.forEach((item: any, i: number) => {
+          item.index = i + 1;
+          item.operation = (
+            <Button type="primary" onClick={() => handleEdit(item)}>
+              编辑
+            </Button>
+          );
+        });
+        setState((state: any) => ({
+          ...state,
+          formData: items,
+        }));
+      });
+    }
+  };
   return (
     <div>
       <Search onSearch={value => console.log(value)} />
@@ -32,7 +79,7 @@ export const Aside: React.FC = () => {
         showLine
         showIcon
         defaultExpandedKeys={['0-0-0']}
-        // onSelect={onSelect}
+        onSelect={onSelect}
       />
     </div>
   );
