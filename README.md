@@ -1,14 +1,16 @@
-# umi project
+# 救灾物资管理系统
 
-## Getting Started
+## 快速开始
 
-Install dependencies,
+运行本程序前需要确保你的电脑已经安装了 `Node` 和 `Yarn`。
+
+进入到项目目录后，输入以下命令安装相关依赖：
 
 ```bash
 $ yarn
 ```
 
-Start the dev server,
+输入以下命令即可运行：
 
 ```bash
 $ yarn start
