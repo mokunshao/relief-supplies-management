@@ -99,9 +99,13 @@ export const MainBody: React.FC = () => {
 
   const getFormData = function() {
     setState((state: any) => ({ ...state, formLoading: true }));
-    Axios.get('/api/items').then(res => {
+    Axios.post('/api/items/getByConditions', {
+      model: undefined,
+      isValid: undefined,
+      typeKey: state.treeSeleted[0],
+    }).then(res => {
       const { data } = res;
-      const { items } = data;
+      const items = data;
       items.forEach((item: any, i: number) => {
         item.index = i + 1;
         item.operation = (
