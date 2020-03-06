@@ -96,27 +96,21 @@ export default {
   },
   'POST /api/items/getByConditions': (req: any, res: any) => {
     let { model, isValid } = req.body;
-    if (model === undefined && isValid === undefined) {
-      res.status(400).send({ error: '请输入一些内容再搜索吧' });
-      return;
-    }
-
     let result;
     const model2 = parseInt(model); // 0 1 2 3
     const isValid2 = Boolean(parseInt(isValid)); // true false
 
-    if (model === undefined && isValid !== undefined) {
+    if (model === undefined && isValid === undefined) {
+      result = fakeItems;
+    } else if (model === undefined && isValid !== undefined) {
       result = fakeItems.items.filter((item: any) => {
         return item.isValid === isValid2;
       });
-    }
-    if (model !== undefined && isValid === undefined) {
+    } else if (model !== undefined && isValid === undefined) {
       result = fakeItems.items.filter((item: any) => {
         return item.model === model2;
       });
-    }
-
-    if (model !== undefined && isValid !== undefined) {
+    } else if (model !== undefined && isValid !== undefined) {
       result = fakeItems.items.filter((item: any) => {
         return item.model === model2 && item.isValid === isValid2;
       });
