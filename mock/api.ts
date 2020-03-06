@@ -32,7 +32,7 @@ const fakeTypes: any = Mock.mock({
 });
 
 const fakeItems: any = Mock.mock({
-  'items|30': [
+  'items|100': [
     {
       key: '@id()',
       name: '@ctitle(4)',
@@ -50,7 +50,7 @@ const fakeItems: any = Mock.mock({
 });
 
 fakeItems.items.forEach((item: any) => {
-  const i = randomNum(5);
+  const i = randomNum(9);
   const type = fakeTypes.types[i];
   item.type = type;
 });
