@@ -4,6 +4,7 @@ import Aside from '@/components/Aside';
 import Main from '@/components/Main';
 import context from '@/context';
 import defaultState from '@/state';
+import ModalEdit from '@/components/ModalEdit';
 
 export default () => {
   const [state, setState] = useState(defaultState);

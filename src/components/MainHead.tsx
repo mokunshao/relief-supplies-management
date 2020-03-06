@@ -8,6 +8,10 @@ export const MainHead: React.FC = () => {
 
   const { state, setState } = useContext(context);
 
+  const clickEdit = (item: any) => {
+    setState({ ...state, currentEditing: item });
+  };
+
   const onFinish = (values: { [k: string]: any }) => {
     setState({ ...state, formLoading: true });
     Axios.post('/api/items/getByConditions', values).then(res => {
@@ -16,7 +20,7 @@ export const MainHead: React.FC = () => {
       items.forEach((item: any, i: number) => {
         item.index = i + 1;
         item.operation = (
-          <Button type="primary" onClick={() => handleEdit(item)}>
+          <Button type="primary" onClick={() => clickEdit(item)}>
             编辑
           </Button>
         );
@@ -33,7 +37,7 @@ export const MainHead: React.FC = () => {
       items.forEach((item: any, i: number) => {
         item.index = i + 1;
         item.operation = (
-          <Button type="primary" onClick={() => handleEdit(item)}>
+          <Button type="primary" onClick={() => clickEdit(item)}>
             编辑
           </Button>
         );

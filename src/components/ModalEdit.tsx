@@ -9,7 +9,6 @@ const { Option } = Select;
 
 interface Props {
   visible: boolean;
-  setVidsible: Function;
   callback: Function;
 }
 
@@ -23,19 +22,21 @@ const tailLayout = {
 };
 
 export const ModalEdit: React.FC<Props> = props => {
-  const { visible, setVidsible, callback } = props;
+  const { visible, callback } = props;
 
-  const { state } = useContext(context);
+  const { state, setState } = useContext(context);
 
-  const item = (state.currentEditing && deepClone(state.currentEditing)) || {};
-
-  const [tempForm, setTempForm] = useState(item);
+  const item: any = {};
 
   const [form] = Form.useForm();
 
+  const setVidsible = (val: boolean) => {
+    setState({ ...state, isShowModalEdit: val });
+  };
+
   const handleOk = () => {
-    const values = form.getFieldsValue();
-    console.log(values);
+    // const values = form.getFieldsValue();
+    // console.log(values);
     callback();
     setVidsible(false);
   };
@@ -52,7 +53,7 @@ export const ModalEdit: React.FC<Props> = props => {
       onCancel={handleCancel}
       width="50%"
     >
-      {JSON.stringify(item)}
+      {JSON.stringify(state.currentEditing)}
       <Form {...layout} form={form}>
         <Row>
           <Col span={12}>

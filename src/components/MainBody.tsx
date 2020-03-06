@@ -42,6 +42,10 @@ const columns = [
 ];
 
 export const MainBody: React.FC = () => {
+  const { state, setState } = useContext(context);
+
+  console.log(state);
+
   const [selectedRowKeys, setSelectedRowKeys] = useState<Array<any>>([]);
   const onSelectChange = (selectedRowKeys: Array<any>) => {
     setSelectedRowKeys(selectedRowKeys);
@@ -71,7 +75,6 @@ export const MainBody: React.FC = () => {
   );
 
   const [isShowModalAdd, setIsShowModalAdd] = useState(false);
-  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
 
   const showConfirm = () => {
     if (!selectedLength) return;
@@ -88,12 +91,20 @@ export const MainBody: React.FC = () => {
     });
   };
 
-  const { state, setState } = useContext(context);
-
   const handleEdit = (item: Object) => {
-    setIsShowModalEdit(true);
-    const newState = deepClone({ ...state, currentEditing: item });
-    setState(newState);
+    console.log(item);
+    console.log(state);
+    setState((state: any) => ({
+      ...state,
+      currentEditing: item,
+      isShowModalEdit: true,
+    }));
+
+    // state.currentEditing = item;
+    // setState({ ...state, currentEditing: item });
+    // console.log(item);
+    // const state2 = deepClone(state);
+    // setState({ ...state2, isShowModalEdit: true });
   };
 
   const getFormData = function() {
@@ -147,11 +158,7 @@ export const MainBody: React.FC = () => {
         setVidsible={setIsShowModalAdd}
         callback={getFormData}
       />
-      <ModalEdit
-        visible={isShowModalEdit}
-        setVidsible={setIsShowModalEdit}
-        callback={getFormData}
-      />
+      <ModalEdit visible={state.isShowModalEdit} callback={getFormData} />
     </div>
   );
 };
