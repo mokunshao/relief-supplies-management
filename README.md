@@ -13,11 +13,11 @@ git clone https://github.com/mokunshao/relief-supplies-management.git
 进入到项目目录后，输入以下命令安装相关依赖：
 
 ```bash
-$ yarn
+yarn
 ```
 
 输入以下命令即可运行：
 
 ```bash
-$ yarn start
+yarn start
 ```
