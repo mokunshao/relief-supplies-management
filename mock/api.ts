@@ -73,8 +73,9 @@ export default {
   },
   'POST /api/items/getByConditions': (req: any, res: any) => {
     let { model, isValid, typeKey } = req.body;
+    // console.log(req.body);
     let result;
-    const model2 = model; // 0 1 2 3
+    const model2 = parseInt(model); // 0 1 2 3
     const isValid2 = Boolean(parseInt(isValid)); // true false
 
     if ((model === undefined || model === '') && isValid === undefined) {
@@ -85,11 +86,11 @@ export default {
       });
     } else if ((model !== undefined || model !== '') && isValid === undefined) {
       result = fakeItems.items.filter((item: any) => {
-        return item.model == model2;
+        return item.model === model2;
       });
     } else if ((model !== undefined || model !== '') && isValid !== undefined) {
       result = fakeItems.items.filter((item: any) => {
-        return item.model == model2 && item.isValid === isValid2;
+        return item.model === model2 && item.isValid === isValid2;
       });
     }
 
