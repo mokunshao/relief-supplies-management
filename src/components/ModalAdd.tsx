@@ -126,9 +126,8 @@ export const ModalAdd: React.FC<Props> = props => {
               rules={[{ required: true, message: '请输入储备类型!' }]}
             >
               <Select placeholder="请输入储备类型">
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="Yiminghe">yiminghe</Option>
+                <Option value="xxx">xxx</Option>
+                <Option value="yyy">yyy</Option>
               </Select>
             </Form.Item>
 

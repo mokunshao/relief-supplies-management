@@ -60,6 +60,7 @@ export default {
   '/api/types': fakeTypes,
   'POST /api/items/add': (req: any, res: any) => {
     const { data } = req.body;
+    data.type = fakeTypes.types.find((item: any) => item.key === data.type);
     data.key = Mock.Random.id();
     fakeItems.items.push(data);
     res.end('ok');

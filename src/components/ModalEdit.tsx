@@ -113,9 +113,8 @@ export const ModalEdit: React.FC<Props> = props => {
                 placeholder="请输入储备类型"
                 defaultValue={item.type2 ? item.type2 : ''}
               >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="Yiminghe">yiminghe</Option>
+                <Option value="xxx">xxx</Option>
+                <Option value="yyy">yyy</Option>
               </Select>
             </Form.Item>
 
