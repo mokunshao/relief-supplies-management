@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Modal, Form, Input, Radio, Select, Row, Col } from 'antd';
 import Axios from 'axios';
+import context from '@/context';
 
 const { TextArea } = Input;
 
@@ -23,6 +24,7 @@ const tailLayout = {
 
 export const ModalAdd: React.FC<Props> = props => {
   const { visible, setVidsible, callback } = props;
+  const { state, setState } = useContext(context);
 
   const [form] = Form.useForm();
 
@@ -48,13 +50,17 @@ export const ModalAdd: React.FC<Props> = props => {
     resetFormData();
   };
 
+  const handleChange = (value: any) => {
+    console.log(`selected ${value}`);
+  };
+
   return (
     <Modal
       title="新增物资"
       visible={visible}
       onOk={handleOk}
       onCancel={handleCancel}
-      width="50%"
+      width="70%"
     >
       <Form {...layout} form={form}>
         <Row>
@@ -96,9 +102,16 @@ export const ModalAdd: React.FC<Props> = props => {
           </Col>
           <Col span={12}>
             <Form.Item label="物资类别" name="type">
-              <Input />
+              <Select onChange={handleChange}>
+                {state.types.map((item: any) => {
+                  return (
+                    <Option key={item.key} value={item.key}>
+                      {item.title}
+                    </Option>
+                  );
+                })}
+              </Select>
             </Form.Item>
-
             <Form.Item
               label="规格/型号"
               name="model"

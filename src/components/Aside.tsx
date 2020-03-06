@@ -15,6 +15,12 @@ export const Aside: React.FC = () => {
     axios('/api/types').then(r => {
       const { data } = r;
       const children = data.types;
+
+      setState((state: any) => ({
+        ...state,
+        types: children,
+      }));
+
       const data2: any = [
         {
           title: '',

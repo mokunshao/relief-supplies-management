@@ -5,4 +5,5 @@ export default {
   isShowModalEdit: false,
   currentEditing: {},
   treeSeleted: ['0'],
+  types: [],
 };
