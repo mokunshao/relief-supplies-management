@@ -99,7 +99,7 @@ export const ModalEdit: React.FC<Props> = props => {
           </Col>
           <Col span={12}>
             <Form.Item label="物资类别" name="type" valuePropName="type.key">
-              <Select disabled defaultValue={item.type.key}>
+              <Select disabled defaultValue={item.type ? item.type.key : null}>
                 {state.types.map((item: any) => {
                   return (
                     <Option key={item.key} value={item.key}>
