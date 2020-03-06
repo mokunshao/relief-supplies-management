@@ -41,6 +41,8 @@ export const ModalEdit: React.FC<Props> = props => {
 
   const [form] = Form.useForm();
 
+  const item = deepClone(state.currentEditing);
+
   return (
     <Modal
       title="编辑物资"
@@ -49,8 +51,7 @@ export const ModalEdit: React.FC<Props> = props => {
       onCancel={handleCancel}
       width="70%"
     >
-      {JSON.stringify(state.currentEditing)}
-      {/* <Form {...layout} form={form}>
+      <Form {...layout} form={form}>
         <Row>
           <Col span={12}>
             <Form.Item
@@ -70,12 +71,12 @@ export const ModalEdit: React.FC<Props> = props => {
               name="isValid"
               rules={[{ required: true, message: '请输入是否有效!' }]}
             >
-              <Radio.Group defaultValue={item.isValid}>
-                <Radio value={false}>否</Radio>
-                <Radio value={true}>是</Radio>
+              <Radio.Group defaultValue={item.isValid ? '1' : '0'}>
+                <Radio value={'1'}>否</Radio>
+                <Radio value={'0'}>是</Radio>
               </Radio.Group>
             </Form.Item>
-
+            {item.isValid && item.isValid.toString()}
             <Form.Item
               label="排序"
               name="sort"
@@ -105,10 +106,7 @@ export const ModalEdit: React.FC<Props> = props => {
               name="type2"
               rules={[{ required: true, message: '请输入储备类型!' }]}
             >
-              <Select
-                placeholder="请输入储备类型"
-                defaultValue={item.type2 ? item.type2 : ''}
-              >
+              <Select placeholder="请输入储备类型" defaultValue={item.type2}>
                 <Option value="xxx">xxx</Option>
                 <Option value="yyy">yyy</Option>
               </Select>
@@ -123,7 +121,7 @@ export const ModalEdit: React.FC<Props> = props => {
         <Form.Item label="物资用途" name="usage" {...tailLayout}>
           <TextArea placeholder="请输入物资用途" defaultValue={item.usage} />
         </Form.Item>
-
+        {JSON.stringify(item.usage)}
         <Form.Item
           label="创建时间"
           name="createdTime"
@@ -132,7 +130,7 @@ export const ModalEdit: React.FC<Props> = props => {
         >
           <Input disabled defaultValue={item.createdTime} />
         </Form.Item>
-      </Form> */}
+      </Form>
     </Modal>
   );
 };
