@@ -74,7 +74,9 @@ export default {
   },
   'POST /api/items/getByType': (req: any, res: any) => {
     const { key } = req.body;
-    const items = fakeItems.items.filter((item: any) => item.type.key === key);
+    const items = fakeItems.items.filter(
+      (item: any) => item.type && item.type.key === key,
+    );
     res.json({ items });
   },
   'POST /api/items/edit': (req: any, res: any) => {
