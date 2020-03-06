@@ -31,6 +31,8 @@ export const ModalEdit: React.FC<Props> = props => {
   };
 
   const handleOk = () => {
+    const formData = form.getFieldsValue();
+    console.log(formData);
     callback();
     setVidsible(false);
   };
@@ -51,7 +53,7 @@ export const ModalEdit: React.FC<Props> = props => {
       onCancel={handleCancel}
       width="70%"
     >
-      <Form {...layout} form={form}>
+      <Form initialValues={item} {...layout} form={form}>
         <Row>
           <Col span={12}>
             <Form.Item
@@ -59,11 +61,11 @@ export const ModalEdit: React.FC<Props> = props => {
               name="name"
               rules={[{ required: true, message: '请输入物资品名!' }]}
             >
-              <Input disabled defaultValue={item.name} />
+              <Input disabled />
             </Form.Item>
 
             <Form.Item label="计量单位" name="unit">
-              <Input disabled defaultValue={item.unit} />
+              <Input disabled />
             </Form.Item>
 
             <Form.Item
@@ -71,34 +73,34 @@ export const ModalEdit: React.FC<Props> = props => {
               name="isValid"
               rules={[{ required: true, message: '请输入是否有效!' }]}
             >
-              <Radio.Group defaultValue={item.isValid ? '1' : '0'}>
-                <Radio value={'1'}>否</Radio>
-                <Radio value={'0'}>是</Radio>
+              <Radio.Group>
+                <Radio value={false}>否</Radio>
+                <Radio value={true}>是</Radio>
               </Radio.Group>
             </Form.Item>
-            {item.isValid && item.isValid.toString()}
+
             <Form.Item
               label="排序"
               name="sort"
               rules={[{ required: true, message: '请输入排序!' }]}
             >
-              <Input placeholder="请输入排序" defaultValue={item.sort} />
+              <Input placeholder="请输入排序" />
             </Form.Item>
 
             <Form.Item label="体积" name="volume">
-              <Input placeholder="请输入体积" defaultValue={item.volume} />
+              <Input placeholder="请输入体积" />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item label="物资类别" name="type">
-              <Input disabled defaultValue={item.type ? item.type.title : ''} />
+              <Input disabled />
             </Form.Item>
             <Form.Item
               label="规格/型号"
               name="model"
               rules={[{ required: true, message: '请输入规格/型号!' }]}
             >
-              <Input placeholder="请输入规格/型号" defaultValue={item.model} />
+              <Input placeholder="请输入规格/型号" />
             </Form.Item>
 
             <Form.Item
@@ -106,29 +108,28 @@ export const ModalEdit: React.FC<Props> = props => {
               name="type2"
               rules={[{ required: true, message: '请输入储备类型!' }]}
             >
-              <Select placeholder="请输入储备类型" defaultValue={item.type2}>
+              <Select placeholder="请输入储备类型">
                 <Option value="xxx">xxx</Option>
                 <Option value="yyy">yyy</Option>
               </Select>
             </Form.Item>
 
             <Form.Item label="重量" name="weight">
-              <Input placeholder="请输入重量" defaultValue={item.weight} />
+              <Input placeholder="请输入重量" />
             </Form.Item>
           </Col>
         </Row>
 
         <Form.Item label="物资用途" name="usage" {...tailLayout}>
-          <TextArea placeholder="请输入物资用途" defaultValue={item.usage} />
+          <TextArea placeholder="请输入物资用途" />
         </Form.Item>
-        {JSON.stringify(item.usage)}
         <Form.Item
           label="创建时间"
           name="createdTime"
           labelCol={{ span: 2 }}
           wrapperCol={{ span: 8 }}
         >
-          <Input disabled defaultValue={item.createdTime} />
+          <Input disabled />
         </Form.Item>
       </Form>
     </Modal>
