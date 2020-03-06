@@ -4,7 +4,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import context from '@/context';
 import axios from 'axios';
 import Axios from 'axios';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 
 const { Search } = Input;
 
@@ -72,6 +72,16 @@ export const Aside: React.FC = () => {
       });
     }
   };
+  const [visible, setVisible] = useState(false);
+
+  const handleOk = () => {
+    setVisible(false);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
   return (
     <div>
       <Search onSearch={value => console.log(value)} />
@@ -83,6 +93,15 @@ export const Aside: React.FC = () => {
         defaultExpandedKeys={['0']}
         onSelect={onSelect}
       />
+      <Button onClick={() => setVisible(true)}>自定义物资类别</Button>
+      <Modal
+        title="自定义物资类别"
+        visible={visible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        iput
+      </Modal>
     </div>
   );
 };
