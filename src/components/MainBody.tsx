@@ -44,8 +44,6 @@ const columns = [
 export const MainBody: React.FC = () => {
   const { state, setState } = useContext(context);
 
-  console.log(state);
-
   const [selectedRowKeys, setSelectedRowKeys] = useState<Array<any>>([]);
   const onSelectChange = (selectedRowKeys: Array<any>) => {
     setSelectedRowKeys(selectedRowKeys);
