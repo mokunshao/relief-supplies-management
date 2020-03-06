@@ -101,7 +101,7 @@ export default {
     const isValid2 = Boolean(parseInt(isValid)); // true false
 
     if (model === undefined && isValid === undefined) {
-      result = fakeItems;
+      result = fakeItems.items;
     } else if (model === undefined && isValid !== undefined) {
       result = fakeItems.items.filter((item: any) => {
         return item.isValid === isValid2;
