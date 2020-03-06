@@ -18,6 +18,7 @@ export const MainHead: React.FC = () => {
 
   const onFinish = (values: { [k: string]: any }) => {
     setState((state: any) => ({ ...state, formLoading: true }));
+    values.typeKey = state.treeSeleted[0];
     Axios.post('/api/items/getByConditions', values).then(res => {
       const { data } = res;
       const items = data;
@@ -54,6 +55,7 @@ export const MainHead: React.FC = () => {
         ...state,
         formData: items,
         formLoading: false,
+        treeSeleted: ['0'],
       }));
     });
   };

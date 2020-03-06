@@ -95,7 +95,7 @@ export default {
     res.end('ok');
   },
   'POST /api/items/getByConditions': (req: any, res: any) => {
-    let { model, isValid } = req.body;
+    let { model, isValid, typeKey } = req.body;
     let result;
     const model2 = parseInt(model); // 0 1 2 3
     const isValid2 = Boolean(parseInt(isValid)); // true false
@@ -115,6 +115,10 @@ export default {
         return item.model === model2 && item.isValid === isValid2;
       });
     }
+
+    result = result.filter((element: any) => {
+      return element.type.key === typeKey;
+    });
 
     res.send(result);
   },

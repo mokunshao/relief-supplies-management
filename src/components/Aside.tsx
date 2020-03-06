@@ -35,7 +35,8 @@ export const Aside: React.FC = () => {
     }));
   };
 
-  const onSelect = (selectedKeys: any, info: any) => {
+  const onSelect = (selectedKeys: any) => {
+    setState((state: any) => ({ ...state, treeSeleted: selectedKeys }));
     const key = selectedKeys[0];
     if (key === '0') {
       Axios.get('/api/items').then(r => {
@@ -73,12 +74,14 @@ export const Aside: React.FC = () => {
   };
   return (
     <div>
+      {JSON.stringify(state.treeSeleted)}
       <Search onSearch={value => console.log(value)} />
       <Tree
+        selectedKeys={state.treeSeleted}
         treeData={treeData}
         showLine
         showIcon
-        defaultExpandedKeys={['0-0-0']}
+        defaultExpandedKeys={['0']}
         onSelect={onSelect}
       />
     </div>

@@ -4,4 +4,5 @@ export default {
   formLoading: false,
   isShowModalEdit: false,
   currentEditing: {},
+  treeSeleted: ['0'],
 };
