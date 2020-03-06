@@ -12,9 +12,9 @@ const fakeItems: any = Mock.mock({
       name: '@ctitle(4)',
       unit: '斤',
       'isValid|1': true,
-      'sort|1-5': 1,
+      sort: '@string(number,5)',
       volume: '15',
-      'model|1-5': 1,
+      model: '@string(number,5)',
       type2: 'xx',
       weight: '10kg',
       usage: 'adwecswewe',
@@ -73,9 +73,7 @@ export default {
   },
   'POST /api/items/getByConditions': (req: any, res: any) => {
     let { model, isValid, typeKey } = req.body;
-    // console.log(req.body);
     let result;
-    const model2 = parseInt(model); // 0 1 2 3
     const isValid2 = Boolean(parseInt(isValid)); // true false
 
     if ((model === undefined || model === '') && isValid === undefined) {
@@ -86,17 +84,17 @@ export default {
       });
     } else if ((model !== undefined || model !== '') && isValid === undefined) {
       result = fakeItems.items.filter((item: any) => {
-        return item.model === model2;
+        return item.model === model;
       });
     } else if ((model !== undefined || model !== '') && isValid !== undefined) {
       result = fakeItems.items.filter((item: any) => {
-        return item.model === model2 && item.isValid === isValid2;
+        return item.model === model && item.isValid === isValid2;
       });
     }
 
     if (typeKey !== '0') {
       result = result.filter((element: any) => {
-        return element.type.key === typeKey;
+        return element.type && element.type.key === typeKey;
       });
     }
 
