@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Modal, Form, Input, Radio, Select, Row, Col } from 'antd';
 import Axios from 'axios';
 import context from '@/context';
+import { Random } from 'mockjs';
 
 const { TextArea } = Input;
 
@@ -35,7 +36,7 @@ export const ModalAdd: React.FC<Props> = props => {
       const formData = form.getFieldsValue();
       const formData2 = {
         ...formData,
-        createdTime: Date.now(),
+        createdTime: Random.now('second', 'yyyy-MM-dd HH:mm:ss'),
       };
       Axios.post('/api/items/add', { data: formData2 }).then(() => {
         setVidsible(false);
