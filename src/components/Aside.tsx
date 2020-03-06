@@ -4,14 +4,14 @@ import { HomeOutlined } from '@ant-design/icons';
 import context from '@/context';
 import axios from 'axios';
 import Axios from 'axios';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Form } from 'antd';
 
 const { Search } = Input;
 
 export const Aside: React.FC = () => {
   const [treeData, setTreeData] = useState([]);
   const { state, setState } = useContext(context);
-  useEffect(() => {
+  const getTypes = () => {
     axios('/api/types').then(r => {
       const { data } = r;
       const children = data.types;
@@ -25,6 +25,9 @@ export const Aside: React.FC = () => {
       data2[0].icon = <HomeOutlined />;
       setTreeData(data2);
     });
+  };
+  useEffect(() => {
+    getTypes();
   }, []);
 
   const handleEdit = (item: Object) => {
@@ -74,13 +77,25 @@ export const Aside: React.FC = () => {
   };
   const [visible, setVisible] = useState(false);
 
+  const resetFormData = () => form.resetFields();
+
   const handleOk = () => {
-    setVisible(false);
+    form.validateFields().then(() => {
+      const formData = form.getFieldsValue();
+      Axios.post('/api/types/add', { title: formData.typeTitle }).then(r => {
+        setVisible(false);
+        resetFormData();
+        getTypes();
+      });
+    });
   };
 
   const handleCancel = () => {
     setVisible(false);
+    resetFormData();
   };
+
+  const [form] = Form.useForm();
 
   return (
     <div>
@@ -100,7 +115,15 @@ export const Aside: React.FC = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        iput
+        <Form form={form}>
+          <Form.Item
+            label="物资类别"
+            name="typeTitle"
+            rules={[{ required: true, message: '请输入新的物资类别！' }]}
+          >
+            <Input placeholder="请输入新的物资类别" />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );
