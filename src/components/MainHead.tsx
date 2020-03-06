@@ -35,6 +35,7 @@ export const MainHead: React.FC = () => {
         formData: items,
         formLoading: false,
       }));
+      form.resetFields();
     });
   };
 
